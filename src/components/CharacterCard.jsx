@@ -5,7 +5,11 @@ import { StarOutlined } from "@ant-design/icons"
 
 const CharacterCard = ({character}) => {
   return (
-    <Card title={character.name} cover={<img src="" alt="Rick" />} extra={<StarOutlined />}>
+    <Card 
+      title={character.name} 
+      cover={<img src={character.image} alt={character.name} />} 
+      extra={<StarOutlined />}
+      >
       <Meta description="burrrrp" />
       <Meta description="ble" />
     </Card>

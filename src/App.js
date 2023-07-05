@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { Col } from 'antd'
 import Searcher from './components/Searcher'
 import CharacterList from './components/CharacterList'
 import logo from './statics/Rick_and_Morty.svg'
 import './App.css'
 import { getCharacters } from './api'
-import { setCharacters as setCharactersActions } from './actions'
+import { getCharactersWithLocation, setCharacters } from './actions'
+import { useDispatch, useSelector } from 'react-redux'
 
-function App({characters, setCharacters}) {
+function App() {
+  const characters = useSelector(state => state.characters)
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const chars = async() => { 
       let list = await getCharacters() 
-      setCharacters(list.results)
+      dispatch(getCharactersWithLocation(list.results))
     } 
     chars()
   }, [])
@@ -30,12 +33,4 @@ function App({characters, setCharacters}) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  characters: state.characters
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  setCharacters: (value) => dispatch(setCharactersActions(value))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
