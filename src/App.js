@@ -9,8 +9,8 @@ import { getCharactersWithLocation, setCharacters, setLoading } from './actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
-  const characters = useSelector(state => state.characters)
-  const loading = useSelector(state => state.loading)
+  const characters = useSelector(state => state.get('characters')).toJS()
+  const loading = useSelector(state => state.get('loading'))
   const dispatch = useDispatch()
 
   useEffect(() => {
